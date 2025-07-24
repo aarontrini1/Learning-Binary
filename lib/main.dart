@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:learningbinary/pages/history.dart';
 import 'package:learningbinary/pages/home.dart';
+import 'package:learningbinary/pages/learning/learningMain.dart';
+import 'package:learningbinary/pages/practice/binaryToDecimal.dart';
+import 'package:learningbinary/pages/practice/practiceMain.dart';
 
 void main() {
   runApp(const MyApp());
@@ -25,8 +29,20 @@ class _MyAppState extends State<MyApp> {
           case "home":
             page = const HomePage();
             break;
+          case "practice":
+            page = PracticePage();
+            break;
+          case "learning":
+            page = LearningPage();
+            break;
+          case "history":
+            page = HistoryPage();
+            break;
+          case "practicebinarytodecimal":
+            page = BinaryToDecimalPage();
+            break;
           default:
-          throw Exception("Unknown route used: ${settings.name}");
+            throw Exception("Unknown route used: ${settings.name}");
         }
 
         return MaterialPageRoute(builder: (context) => page, settings:settings);
