@@ -52,7 +52,7 @@ class HomePage extends StatelessWidget {
                   const Text(
                     'Learning Binary',
                     style: TextStyle(
-                      fontSize: 48,
+                      fontSize: 44,
                       fontWeight: FontWeight.bold,
                       color: Colors.white,
                       shadows: [
@@ -92,7 +92,7 @@ class HomePage extends StatelessWidget {
                       elevation: 8,
                     ),
                     onPressed: () =>
-                        _navigateToLearning(context), // Setup Nav here
+                        _navigateToLearning(context), 
                     child: const Text(
                       'Learning',
                       style: TextStyle(
@@ -114,7 +114,7 @@ class HomePage extends StatelessWidget {
                       elevation: 8,
                     ),
                     onPressed: () =>
-                        _navigateToPractice(context), // Setup Nav here
+                        _navigateToPractice(context),
                     child: const Text(
                       'Practice',
                       style: TextStyle(

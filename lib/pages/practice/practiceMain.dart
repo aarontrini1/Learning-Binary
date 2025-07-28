@@ -57,7 +57,7 @@ class _PracticePageState extends State<PracticePage> {
                     child: const Text(
                       'Binary to Numbers',
                       style: TextStyle(
-                        fontSize: 36,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -78,7 +78,7 @@ class _PracticePageState extends State<PracticePage> {
                     child: const Text(
                       'TBA...',
                       style: TextStyle(
-                        fontSize: 36,
+                        fontSize: 30,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
