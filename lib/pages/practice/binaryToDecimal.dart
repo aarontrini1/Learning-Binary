@@ -15,7 +15,7 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
   String? userInput;
   final TextEditingController _answerController = TextEditingController();
   bool? isCorrect;
-  bool? showFeedback;
+  bool showFeedback = false;
 
   @override
   void initState() {
@@ -33,13 +33,19 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
   }
 
   void checkAnswer() {
-    if (int.parse(_answerController.text) == currentNumber) {
-      //correct
-      print("CORRECT");
-    } else {
-      //incorrect
-      print("INCORRECT");
-    }
+    setState(() {
+      isCorrect = (int.parse(_answerController.text) == currentNumber);
+      showFeedback = true;
+    });
+  }
+
+  void nextQuestion() {
+    setState(() {
+      isCorrect = null;
+      showFeedback = false;
+      currentNumber = getNumber();
+      _answerController.clear();
+    });
   }
 
   int getNumber() {
@@ -52,6 +58,8 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
 
   Widget _buildFeedbackPanel() {
     return Container(
+      width: double.infinity,
+      height: 200,
       color: Colors.black,
       // margin: EdgeInsets.all(2),
       // width: MediaQuery.of(context).size.width,
@@ -59,9 +67,10 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
         mainAxisSize: MainAxisSize.min,
         children: [
           Text(
-            isCorrect == true ? "Correct!" : "Incorrect",
+            isCorrect ?? false ? "✅ Correct!" : "Incorrect",
             style: TextStyle(
-              color: isCorrect == true ? Colors.green : Colors.red,
+              color: isCorrect ?? false ? Colors.green : Colors.red,
+              fontSize: 32,
             ),
           ),
           if (isCorrect == false)
@@ -70,16 +79,19 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
               style: TextStyle(color: Colors.white),
             ),
           SizedBox(height: 10),
+          Spacer(flex:1),
           ElevatedButton(
-            onPressed: () {},
+            onPressed: () => nextQuestion(),
             child: Text(
               "Continue",
               style: TextStyle(
                 backgroundColor: Colors.green,
                 color: Colors.black,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
+          SizedBox(height: 20)
         ],
       ),
     );
@@ -257,10 +269,13 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
           ),
 
           // Feedback panel
-          Positioned(
-            bottom: showFeedback == null || showFeedback == false ? -200 : 0,
-            child: _buildFeedbackPanel(),
-          ),
+          if (showFeedback)
+            Positioned(
+              bottom: showFeedback == false ? -200 : 0,
+              left: 0,
+              right: 0,
+              child: _buildFeedbackPanel(),
+            ),
         ],
       ),
     );
