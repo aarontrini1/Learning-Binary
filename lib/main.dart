@@ -5,6 +5,7 @@ import 'package:learningbinary/pages/home.dart';
 import 'package:learningbinary/pages/learning/learningMain.dart';
 import 'package:learningbinary/pages/practice/binaryToDecimal.dart';
 import 'package:learningbinary/pages/practice/practiceMain.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 void main() {
   runApp(const MyApp());
@@ -28,6 +29,7 @@ class _MyAppState extends State<MyApp> {
         DeviceOrientation.portraitDown,
       ]);
     return MaterialApp(
+      title: "Learning Binary",
       onGenerateRoute: (settings) {
         Widget page;
         switch (settings.name) {

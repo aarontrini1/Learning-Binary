@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/services.dart';
 
@@ -60,38 +61,63 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
     return Container(
       width: double.infinity,
       height: 200,
-      color: Colors.black,
+      color: Colors.black, // TODO: FIND COLOUR THAT FITS BETTER
+      padding: EdgeInsets.symmetric(horizontal: 10),
       // margin: EdgeInsets.all(2),
       // width: MediaQuery.of(context).size.width,
       child: Column(
         mainAxisSize: MainAxisSize.min,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(
-            isCorrect ?? false ? "✅ Correct!" : "Incorrect",
-            style: TextStyle(
-              color: isCorrect ?? false ? Colors.green : Colors.red,
-              fontSize: 32,
-            ),
+          SizedBox(height: 10),
+          Row(
+            children: [
+              Image.asset(
+                isCorrect ?? false
+                    ? 'assets/check_mark.png'
+                    : 'assets/incorrect_mark.png',
+                height: 28,
+                width: 28,
+              ),
+              SizedBox(width: 5),
+              Text(
+                isCorrect ?? false ? "✅ Correct! " : "Incorrect",
+                style: GoogleFonts.caveatBrush(
+                  color: isCorrect ?? false ? Colors.green : Colors.red,
+                  fontSize: 30,
+                ),
+              ),
+            ],
           ),
           if (isCorrect == false)
+            Text("Correct Answer:", style: GoogleFonts.caveatBrush(color: Colors.red, fontSize: 24)),
+          if (isCorrect == false)
             Text(
-              "The answer was ${currentNumber}",
-              style: TextStyle(color: Colors.white),
+              "$currentNumber",
+              style: TextStyle(
+                color: Colors.red,
+                fontSize: 18,
+                fontWeight: FontWeight.w600,
+              ),
             ),
           SizedBox(height: 10),
-          Spacer(flex:1),
-          ElevatedButton(
-            onPressed: () => nextQuestion(),
-            child: Text(
-              "Continue",
-              style: TextStyle(
-                backgroundColor: Colors.green,
-                color: Colors.black,
-                fontWeight: FontWeight.bold,
+          Spacer(flex: 1),
+          ConstrainedBox(
+            constraints: BoxConstraints.tightFor(height: 50, width: MediaQuery.of(context).size.width),
+            child: ElevatedButton(
+              onPressed: () => nextQuestion(),
+              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
+              child: Text(
+                "CONTINUE",
+                style: TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.w900,
+                  fontSize: 18,
+                ),
               ),
             ),
           ),
-          SizedBox(height: 20)
+          SizedBox(height: 20),
         ],
       ),
     );
@@ -102,7 +128,6 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        // for (int i = 0; i < _answerController.text.length; i++)
         Container(
           margin: EdgeInsets.symmetric(horizontal: 2),
           width: MediaQuery.of(context).size.width / 10,
@@ -205,9 +230,6 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
                                 showCursor: false,
                                 decoration: InputDecoration(
                                   hintText: 'Answer in Decimal',
-                                  // enabledBorder: UnderlineInputBorder(
-                                  //   borderSide: BorderSide(color: Colors.pink),
-                                  // ),
                                   focusedBorder: UnderlineInputBorder(
                                     borderSide: BorderSide(
                                       color: Colors.blue,
@@ -274,6 +296,7 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
               bottom: showFeedback == false ? -200 : 0,
               left: 0,
               right: 0,
+              height: isCorrect ?? false ? 150 : 200,
               child: _buildFeedbackPanel(),
             ),
         ],
