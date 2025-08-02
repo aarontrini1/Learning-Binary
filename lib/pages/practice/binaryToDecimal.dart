@@ -61,7 +61,7 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
     return Container(
       width: double.infinity,
       height: 200,
-      color: Colors.black, // TODO: FIND COLOUR THAT FITS BETTER
+      color: Colors.black,
       padding: EdgeInsets.symmetric(horizontal: 10),
       // margin: EdgeInsets.all(2),
       // width: MediaQuery.of(context).size.width,
@@ -81,7 +81,7 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
               ),
               SizedBox(width: 5),
               Text(
-                isCorrect ?? false ? "✅ Correct! " : "Incorrect",
+                isCorrect ?? false ? "Correct! " : "Incorrect",
                 style: GoogleFonts.caveatBrush(
                   color: isCorrect ?? false ? Colors.green : Colors.red,
                   fontSize: 30,
@@ -90,7 +90,10 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
             ],
           ),
           if (isCorrect == false)
-            Text("Correct Answer:", style: GoogleFonts.caveatBrush(color: Colors.red, fontSize: 24)),
+            Text(
+              "Correct Answer:",
+              style: GoogleFonts.caveatBrush(color: Colors.red, fontSize: 24),
+            ),
           if (isCorrect == false)
             Text(
               "$currentNumber",
@@ -103,7 +106,10 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
           SizedBox(height: 10),
           Spacer(flex: 1),
           ConstrainedBox(
-            constraints: BoxConstraints.tightFor(height: 50, width: MediaQuery.of(context).size.width),
+            constraints: BoxConstraints.tightFor(
+              height: 50,
+              width: MediaQuery.of(context).size.width,
+            ),
             child: ElevatedButton(
               onPressed: () => nextQuestion(),
               style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
@@ -135,7 +141,12 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
           decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(8),
-            border: Border.all(color: Colors.grey),
+            border: Border.all(
+              color: showFeedback
+                  ? (isCorrect ?? false ? Colors.green : Colors.red)
+                  : Colors.grey,
+              width: 2,
+            ),
           ),
           child: Center(
             child: Text(
