@@ -295,7 +295,12 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back, size: 28),
                   color: Colors.blueAccent,
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    FocusScope.of(context).unfocus();
+                    Future.delayed(Duration(milliseconds: 250), () {
+                      Navigator.of(context).pop();
+                    });
+                  },
                 ),
               ),
             ),

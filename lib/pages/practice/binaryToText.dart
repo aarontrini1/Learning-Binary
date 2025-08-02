@@ -58,8 +58,11 @@ class _BinaryToTextPageState extends State<BinaryToTextPage> {
   String generateRandomString(int len) {
     var r = Random();
     const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
-  return List.generate(len, (index) => _chars[r.nextInt(_chars.length)]).join();
-}
+    return List.generate(
+      len,
+      (index) => _chars[r.nextInt(_chars.length)],
+    ).join();
+  }
 
   String getBinaryNumber(char) {
     int codeUnit = char.codeUnitAt(0);
@@ -242,7 +245,9 @@ class _BinaryToTextPageState extends State<BinaryToTextPage> {
                                 controller: _answerController,
                                 keyboardType: TextInputType.text,
                                 inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
+                                  FilteringTextInputFormatter.allow(
+                                    RegExp('[a-zA-Z]'),
+                                  ),
                                   LengthLimitingTextInputFormatter(8),
                                 ],
                                 showCursor: false,
@@ -302,7 +307,12 @@ class _BinaryToTextPageState extends State<BinaryToTextPage> {
                 child: IconButton(
                   icon: const Icon(Icons.arrow_back, size: 28),
                   color: Colors.blueAccent,
-                  onPressed: () => Navigator.of(context).pop(),
+                  onPressed: () {
+                    FocusScope.of(context).unfocus();
+                    Future.delayed(Duration(milliseconds: 250), () {
+                      Navigator.of(context).pop();
+                    });
+                  },
                 ),
               ),
             ),
