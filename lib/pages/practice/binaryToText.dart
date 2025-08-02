@@ -6,14 +6,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/services.dart';
 
-class BinaryToDecimalPage extends StatefulWidget {
-  const BinaryToDecimalPage({super.key});
+class BinaryToTextPage extends StatefulWidget {
+  const BinaryToTextPage({super.key});
 
   @override
-  State<BinaryToDecimalPage> createState() => _BinaryToDecimalPageState();
+  State<BinaryToTextPage> createState() => _BinaryToTextPageState();
 }
 
-class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
+class _BinaryToTextPageState extends State<BinaryToTextPage> {
   String? currentCharacter;
   String? userInput;
   final TextEditingController _answerController = TextEditingController();
@@ -62,7 +62,8 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
 }
 
   String getBinaryNumber(char) {
-    return char.toRadixString(2);
+    int codeUnit = char.codeUnitAt(0);
+    return codeUnit.toRadixString(2).padLeft(8, "0");
   }
 
   Widget _buildFeedbackPanel() {
@@ -235,7 +236,7 @@ class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
                                 ? 1
                                 : 0.0,
                             child: SizedBox(
-                              width: 200,
+                              width: 210,
                               child: TextField(
                                 autofocus: true,
                                 controller: _answerController,

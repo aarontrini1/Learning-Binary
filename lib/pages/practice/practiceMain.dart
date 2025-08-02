@@ -14,6 +14,10 @@ class _PracticePageState extends State<PracticePage> {
     Navigator.of(context).pushNamed("practicebinarytodecimal");
   }
 
+  void _navigateToPracticeBinaryToText(BuildContext context) {
+    Navigator.of(context).pushNamed("practicebinarytotext");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,7 +68,7 @@ class _PracticePageState extends State<PracticePage> {
                   ),
                   const SizedBox(height: 20),
                   ElevatedButton(
-                    key: const Key('TBAdecimalToBinary'),
+                    key: const Key('binaryToText'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.white,
                       foregroundColor: Colors.blue.shade800,
@@ -74,9 +78,9 @@ class _PracticePageState extends State<PracticePage> {
                       minimumSize: const Size(double.infinity, 100),
                       elevation: 8,
                     ),
-                    onPressed: () => (), // Setup Nav here
+                    onPressed: () => _navigateToPracticeBinaryToText(context), // Setup Nav here
                     child: const Text(
-                      'TBA...',
+                      'Binary to Text',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
