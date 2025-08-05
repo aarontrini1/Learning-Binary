@@ -159,6 +159,7 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: Stack(
         children: [
@@ -184,7 +185,8 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Spacer(flex: 1),
+                    // Spacer(flex: 1),
+                    SizedBox(height: 100),
                     Container(
                       padding: EdgeInsets.symmetric(
                         horizontal: 16,
@@ -204,9 +206,30 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 250),
+                    SizedBox(height: 200),
+                    
+Row(
+                      mainAxisAlignment: MainAxisAlignment.end,
+                      children: [
+                        ElevatedButton(
+                          style: ElevatedButton.styleFrom(
+                            minimumSize: Size(
+                              MediaQuery.of(context).size.width * 0.03,
+                              MediaQuery.of(context).size.height * 0.05,
+                            ),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(15.0),
+                            ),
+                          ),
+                          onPressed: () {},
+                          child: Icon(Icons.backspace, size: 24),
+                          
+                        ),
+                      ],
+                    ),
+                    
+                    SizedBox(height: 5),
                     SizedBox(
-                      // height: 60,
                       width: double.infinity,
                       child: Stack(
                         alignment: Alignment.center,
@@ -222,9 +245,13 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                                 _buildDigitBoxes(i),
                             ],
                           ),
-                          // TODO: Add a backspace above the numbers row
+
+                          
+
                           // TODO: Add onPressed for below btns to show typed Binary numbers on screen similar to TextField in BinToDec and BinToText
                           // FIx displays according to D
+
+                          SizedBox(height: 100),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
                             textBaseline: TextBaseline.alphabetic,
@@ -236,12 +263,19 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                                       MediaQuery.of(context).size.width / 3,
                                       MediaQuery.of(context).size.height / 3,
                                     ),
-                                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(15.0))
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
                                   ),
                                   onPressed: () {},
-                                  child: Text("0", style: TextStyle(fontSize: 64)),
+                                  child: Text(
+                                    "0",
+                                    style: TextStyle(fontSize: 64),
+                                  ),
                                 ),
                               ),
+
+                              SizedBox(width: 25),
 
                               Expanded(
                                 child: ElevatedButton(
@@ -250,13 +284,17 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                                       MediaQuery.of(context).size.width / 3,
                                       MediaQuery.of(context).size.height / 3,
                                     ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(15.0),
+                                    ),
                                   ),
                                   onPressed: () {},
-                                  child: Text("1"),
+                                  child: Text(
+                                    "1",
+                                    style: TextStyle(fontSize: 64),
+                                  ),
                                 ),
                               ),
-
-                              // SizedBox(width: 10, height: 10),
                             ],
                           ),
                         ],
