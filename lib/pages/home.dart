@@ -40,6 +40,15 @@ class HomePage extends StatelessWidget {
         ),
         // Binary pattern overlay
         CustomPaint(size: Size.infinite, painter: BinaryPatternPainter()),
+        Positioned(
+          top: MediaQuery.of(context).size.height * 0.045,
+          right: MediaQuery.of(context).size.width * 0.02,
+          child: FloatingActionButton(
+            onPressed: () {},
+            mini: true,
+            child: const Icon(Icons.help_outline),
+          ),
+        ),
         // Main content
         Center(
           child: SafeArea(
@@ -91,8 +100,7 @@ class HomePage extends StatelessWidget {
                       minimumSize: const Size(double.infinity, 100),
                       elevation: 8,
                     ),
-                    onPressed: () =>
-                        _navigateToLearning(context), 
+                    onPressed: () => _navigateToLearning(context),
                     child: const Text(
                       'Learning',
                       style: TextStyle(
@@ -113,8 +121,7 @@ class HomePage extends StatelessWidget {
                       minimumSize: const Size(double.infinity, 100),
                       elevation: 8,
                     ),
-                    onPressed: () =>
-                        _navigateToPractice(context),
+                    onPressed: () => _navigateToPractice(context),
                     child: const Text(
                       'Practice',
                       style: TextStyle(
