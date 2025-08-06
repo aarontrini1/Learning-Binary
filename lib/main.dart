@@ -7,7 +7,6 @@ import 'package:learningbinary/pages/practice/binaryToDecimal.dart';
 import 'package:learningbinary/pages/practice/binaryToText.dart';
 import 'package:learningbinary/pages/practice/decimalToBinary.dart';
 import 'package:learningbinary/pages/practice/practiceMain.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:learningbinary/pages/practice/textToBinary.dart';
 
 void main() {
