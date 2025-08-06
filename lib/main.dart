@@ -8,6 +8,7 @@ import 'package:learningbinary/pages/practice/binaryToText.dart';
 import 'package:learningbinary/pages/practice/decimalToBinary.dart';
 import 'package:learningbinary/pages/practice/practiceMain.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:learningbinary/pages/practice/textToBinary.dart';
 
 void main() {
   runApp(const MyApp());
@@ -55,6 +56,9 @@ class _MyAppState extends State<MyApp> {
             break;
           case "practicedecimaltobinary":
             page = DecimalToBinaryPage();
+            break;
+          case "practicetexttobinary":
+            page = TextToBinaryPage();
             break;
           default:
             throw Exception("Unknown route used: ${settings.name}");

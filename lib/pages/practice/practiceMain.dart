@@ -22,6 +22,10 @@ class _PracticePageState extends State<PracticePage> {
     Navigator.of(context).pushNamed("practicedecimaltobinary");
   }
 
+  void _navigateToPracticeTextToBinary(BuildContext context) {
+    Navigator.of(context).pushNamed("practicetexttobinary");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -106,6 +110,27 @@ class _PracticePageState extends State<PracticePage> {
                     onPressed: () => _navigateToPracticeDecimalToBinary(context), // Setup Nav here
                     child: const Text(
                       'Decimal to Binary',
+                      style: TextStyle(
+                        fontSize: 30,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton(
+                    key: const Key('textToBinary'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.white,
+                      foregroundColor: Colors.blue.shade800,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      minimumSize: const Size(double.infinity, 100),
+                      elevation: 8,
+                    ),
+                    onPressed: () => _navigateToPracticeTextToBinary(context), // Setup Nav here
+                    child: const Text(
+                      'Text to Binary',
                       style: TextStyle(
                         fontSize: 30,
                         fontWeight: FontWeight.bold,
