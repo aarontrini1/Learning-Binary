@@ -245,8 +245,6 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          // TODO: Add onPressed for below btns to show typed Binary numbers on screen similar to TextField in BinToDec and BinToText
-                          // FIx displays according to D
                           SizedBox(height: 100),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
