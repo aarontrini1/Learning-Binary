@@ -13,8 +13,7 @@ class DecimalToBinaryPage extends StatefulWidget {
 
 class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
   int? currentNumber;
-  String? userInput;
-  final TextEditingController _answerController = TextEditingController();
+  String userInput = "";
   bool? isCorrect;
   bool showFeedback = false;
 
@@ -22,20 +21,16 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
   void initState() {
     super.initState();
     currentNumber = getNumber();
-    _answerController.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
   void dispose() {
-    _answerController.dispose();
     super.dispose();
   }
 
   void checkAnswer() {
     setState(() {
-      isCorrect = (int.parse(_answerController.text) == currentNumber);
+      isCorrect = (int.parse(userInput) == int.parse(getBinaryNumber(currentNumber)));
       showFeedback = true;
     });
   }
@@ -45,7 +40,7 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
       isCorrect = null;
       showFeedback = false;
       currentNumber = getNumber();
-      _answerController.clear();
+      userInput = "";
     });
   }
 
@@ -94,7 +89,7 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
             ),
           if (isCorrect == false)
             Text(
-              "$currentNumber",
+              "${getBinaryNumber(currentNumber)}",
               style: TextStyle(
                 color: Colors.red,
                 fontSize: 18,
@@ -128,7 +123,7 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
   }
 
   Widget _buildDigitBoxes(i) {
-    String text = _answerController.text;
+    String text = userInput;
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
@@ -147,10 +142,7 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
             ),
           ),
           child: Center(
-            child: Text(
-              _answerController.text[i],
-              style: TextStyle(fontSize: 24),
-            ),
+            child: Text(userInput[i], style: TextStyle(fontSize: 24)),
           ),
         ),
       ],
@@ -159,7 +151,6 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       body: Stack(
         children: [
@@ -206,9 +197,20 @@ class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
                         ),
                       ),
                     ),
-                    SizedBox(height: 200),
-                    
-Row(
+
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.1),
+
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        for (int i = 0; i < userInput.length; i++)
+                          _buildDigitBoxes(i),
+                      ],
+                    ),
+
+                    SizedBox(height: MediaQuery.of(context).size.height * 0.08),
+
+                    Row(
                       mainAxisAlignment: MainAxisAlignment.end,
                       children: [
                         ElevatedButton(
@@ -221,36 +223,30 @@ Row(
                               borderRadius: BorderRadius.circular(15.0),
                             ),
                           ),
-                          onPressed: () {},
+                          onPressed: () {
+                            setState(() {
+                              if (userInput.isNotEmpty) {
+                                userInput = userInput.substring(
+                                  0,
+                                  userInput.length - 1,
+                                );
+                              }
+                            });
+                          },
                           child: Icon(Icons.backspace, size: 24),
-                          
                         ),
                       ],
                     ),
-                    
+
                     SizedBox(height: 5),
+
                     SizedBox(
                       width: double.infinity,
                       child: Stack(
                         alignment: Alignment.center,
                         children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              for (
-                                int i = 0;
-                                i < _answerController.text.length;
-                                i++
-                              )
-                                _buildDigitBoxes(i),
-                            ],
-                          ),
-
-                          
-
                           // TODO: Add onPressed for below btns to show typed Binary numbers on screen similar to TextField in BinToDec and BinToText
                           // FIx displays according to D
-
                           SizedBox(height: 100),
                           Row(
                             crossAxisAlignment: CrossAxisAlignment.end,
@@ -267,7 +263,13 @@ Row(
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (userInput.length < 8) {
+                                      setState(() {
+                                        userInput += "0";
+                                      });
+                                    }
+                                  },
                                   child: Text(
                                     "0",
                                     style: TextStyle(fontSize: 64),
@@ -288,7 +290,13 @@ Row(
                                       borderRadius: BorderRadius.circular(15.0),
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    if (userInput.length < 8) {
+                                      setState(() {
+                                        userInput += "1";
+                                      });
+                                    }
+                                  },
                                   child: Text(
                                     "1",
                                     style: TextStyle(fontSize: 64),
@@ -302,9 +310,7 @@ Row(
                     ),
                     Spacer(flex: 2),
                     ElevatedButton(
-                      onPressed: _answerController.text.length < 1
-                          ? null
-                          : checkAnswer,
+                      onPressed: userInput.length < 1 ? null : checkAnswer,
 
                       style: ElevatedButton.styleFrom(
                         minimumSize: Size(
