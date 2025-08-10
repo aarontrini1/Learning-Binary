@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/services.dart';
 
-class DecimalToBinaryPage extends StatefulWidget {
-  const DecimalToBinaryPage({super.key});
+class PracticeDecimalToBinaryPage extends StatefulWidget {
+  const PracticeDecimalToBinaryPage({super.key});
 
   @override
-  State<DecimalToBinaryPage> createState() => _DecimalToBinaryPageState();
+  State<PracticeDecimalToBinaryPage> createState() => _PracticeDecimalToBinaryPageState();
 }
 
-class _DecimalToBinaryPageState extends State<DecimalToBinaryPage> {
+class _PracticeDecimalToBinaryPageState extends State<PracticeDecimalToBinaryPage> {
   int? currentNumber;
   String userInput = "";
   bool? isCorrect;

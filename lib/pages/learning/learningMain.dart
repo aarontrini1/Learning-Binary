@@ -9,6 +9,22 @@ class LearningPage extends StatefulWidget {
 }
 
 class _LearningPageState extends State<LearningPage> {
+  void _navigateToLearningBinaryToDecimal(BuildContext context) {
+    Navigator.of(context).pushNamed("learningbinarytodecimal");
+  }
+
+  void _navigateToLearningBinaryToText(BuildContext context) {
+    Navigator.of(context).pushNamed("learningbinarytotext");
+  }
+
+  void _navigateToLearningDecimalToBinary(BuildContext context) {
+    Navigator.of(context).pushNamed("learningdecimaltobinary");
+  }
+
+  void _navigateToLearningTextToBinary(BuildContext context) {
+    Navigator.of(context).pushNamed("learningtexttobinary");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

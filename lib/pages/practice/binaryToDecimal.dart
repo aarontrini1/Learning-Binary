@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/services.dart';
 
-class BinaryToDecimalPage extends StatefulWidget {
-  const BinaryToDecimalPage({super.key});
+class PracticeBinaryToDecimalPage extends StatefulWidget {
+  const PracticeBinaryToDecimalPage({super.key});
 
   @override
-  State<BinaryToDecimalPage> createState() => _BinaryToDecimalPageState();
+  State<PracticeBinaryToDecimalPage> createState() => _PracticeBinaryToDecimalPageState();
 }
 
-class _BinaryToDecimalPageState extends State<BinaryToDecimalPage> {
+class _PracticeBinaryToDecimalPageState extends State<PracticeBinaryToDecimalPage> {
   int? currentNumber;
   String? userInput;
   final TextEditingController _answerController = TextEditingController();

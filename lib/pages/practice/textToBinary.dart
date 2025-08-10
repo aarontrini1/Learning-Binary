@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'dart:math';
 import 'package:google_fonts/google_fonts.dart';
 
-class TextToBinaryPage extends StatefulWidget {
-  const TextToBinaryPage({super.key});
+class PracticeTextToBinaryPage extends StatefulWidget {
+  const PracticeTextToBinaryPage({super.key});
 
   @override
-  State<TextToBinaryPage> createState() => _TextToBinaryPageState();
+  State<PracticeTextToBinaryPage> createState() => _PracticeTextToBinaryPageState();
 }
 
-class _TextToBinaryPageState extends State<TextToBinaryPage> {
+class _PracticeTextToBinaryPageState extends State<PracticeTextToBinaryPage> {
   String? currentCharacter;
   String userInput = "";
   bool? isCorrect;

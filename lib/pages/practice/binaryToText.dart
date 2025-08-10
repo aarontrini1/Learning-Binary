@@ -4,14 +4,14 @@ import 'package:google_fonts/google_fonts.dart';
 
 import 'package:flutter/services.dart';
 
-class BinaryToTextPage extends StatefulWidget {
-  const BinaryToTextPage({super.key});
+class PracticeBinaryToTextPage extends StatefulWidget {
+  const PracticeBinaryToTextPage({super.key});
 
   @override
-  State<BinaryToTextPage> createState() => _BinaryToTextPageState();
+  State<PracticeBinaryToTextPage> createState() => _PracticeBinaryToTextPageState();
 }
 
-class _BinaryToTextPageState extends State<BinaryToTextPage> {
+class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
   String? currentCharacter;
   String? userInput;
   final TextEditingController _answerController = TextEditingController();
