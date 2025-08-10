@@ -29,6 +29,110 @@ class _LearningPageState extends State<LearningPage> {
           ),
           // Binary pattern overlay
           CustomPaint(size: Size.infinite, painter: BinaryPatternPainter()),
+          Center(
+            child: SafeArea(
+              child: Padding(
+                padding: const EdgeInsets.all(20),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: <Widget>[
+                    Text(
+                      "Learning",
+                      style: TextStyle(
+                        fontSize: 48,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.blue.shade800,
+                      ),
+                    ),
+                    const SizedBox(height: 75),
+                    ElevatedButton(
+                      key: const Key('binaryToDecimal'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.blue.shade800,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: const Size(double.infinity, 100),
+                        elevation: 8,
+                      ),
+                      onPressed: () {}, // Setup Nav here
+                      child: const Text(
+                        'Binary to Numbers',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      key: const Key('binaryToText'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.blue.shade800,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: const Size(double.infinity, 100),
+                        elevation: 8,
+                      ),
+                      onPressed: () {}, // Setup Nav here
+                      child: const Text(
+                        'Binary to Text',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      key: const Key('decimalToBinary'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.blue.shade800,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: const Size(double.infinity, 100),
+                        elevation: 8,
+                      ),
+                      onPressed: () {}, // Setup Nav here
+                      child: const Text(
+                        'Decimal to Binary',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                    const SizedBox(height: 20),
+                    ElevatedButton(
+                      key: const Key('textToBinary'),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.white,
+                        foregroundColor: Colors.blue.shade800,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        minimumSize: const Size(double.infinity, 100),
+                        elevation: 8,
+                      ),
+                      onPressed: () {}, // Setup Nav here
+                      child: const Text(
+                        'Text to Binary',
+                        style: TextStyle(
+                          fontSize: 30,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
           //back button
           Positioned(
             top: 0,

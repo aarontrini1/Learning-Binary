@@ -16,6 +16,10 @@ class HomePage extends StatelessWidget {
     Navigator.of(context).pushNamed("history");
   }
 
+  void _navigateToSupport(BuildContext context) {
+    Navigator.of(context).pushNamed("support");
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(body: _buildHomePage(context));
@@ -43,10 +47,14 @@ class HomePage extends StatelessWidget {
         Positioned(
           top: MediaQuery.of(context).size.height * 0.045,
           right: MediaQuery.of(context).size.width * 0.02,
-          child: FloatingActionButton(
-            onPressed: () {},
-            mini: true,
-            child: const Icon(Icons.help_outline),
+          child: SizedBox(
+            height: MediaQuery.of(context).size.height * 0.04,
+            width: MediaQuery.of(context).size.height * 0.04,
+            child: FloatingActionButton(
+              onPressed: () => _navigateToSupport(context),
+              mini: true,
+              child: const Icon(Icons.help_outline),
+            ),
           ),
         ),
         // Main content

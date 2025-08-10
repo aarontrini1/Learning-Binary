@@ -8,6 +8,7 @@ import 'package:learningbinary/pages/practice/binaryToText.dart';
 import 'package:learningbinary/pages/practice/decimalToBinary.dart';
 import 'package:learningbinary/pages/practice/practiceMain.dart';
 import 'package:learningbinary/pages/practice/textToBinary.dart';
+import 'package:learningbinary/pages/support.dart';
 
 void main() {
   runApp(const MyApp());
@@ -38,27 +39,32 @@ class _MyAppState extends State<MyApp> {
           case "home":
             page = const HomePage();
             break;
+          // Practice Pages
           case "practice":
             page = PracticePage();
             break;
+          case "practicebinarytodecimal":
+            page = PracticeBinaryToDecimalPage();
+            break;
+          case "practicebinarytotext":
+            page = PracticeBinaryToTextPage();
+            break;
+          case "practicedecimaltobinary":
+            page = PracticeDecimalToBinaryPage();
+            break;
+          case "practicetexttobinary":
+            page = PracticeTextToBinaryPage();
+            break;
+          //Learning
           case "learning":
             page = LearningPage();
             break;
           case "history":
             page = HistoryPage();
             break;
-          case "practicebinarytodecimal":
-            page = BinaryToDecimalPage();
-            break;
-          case "practicebinarytotext":
-            page = BinaryToTextPage();
-            break;
-          case "practicedecimaltobinary":
-            page = DecimalToBinaryPage();
-            break;
-          case "practicetexttobinary":
-            page = TextToBinaryPage();
-            break;
+          case "support":
+            page = SupportPage();
+            break;          
           default:
             throw Exception("Unknown route used: ${settings.name}");
         }
