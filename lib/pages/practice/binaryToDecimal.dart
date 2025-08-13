@@ -8,15 +8,18 @@ class PracticeBinaryToDecimalPage extends StatefulWidget {
   const PracticeBinaryToDecimalPage({super.key});
 
   @override
-  State<PracticeBinaryToDecimalPage> createState() => _PracticeBinaryToDecimalPageState();
+  State<PracticeBinaryToDecimalPage> createState() =>
+      _PracticeBinaryToDecimalPageState();
 }
 
-class _PracticeBinaryToDecimalPageState extends State<PracticeBinaryToDecimalPage> {
+class _PracticeBinaryToDecimalPageState
+    extends State<PracticeBinaryToDecimalPage> {
   int? currentNumber;
   String? userInput;
   final TextEditingController _answerController = TextEditingController();
   bool? isCorrect;
   bool showFeedback = false;
+  bool showPlaceValues = false;
 
   @override
   void initState() {
@@ -159,6 +162,17 @@ class _PracticeBinaryToDecimalPageState extends State<PracticeBinaryToDecimalPag
     );
   }
 
+  List<int> getPlaceValues(String binaryString) {
+    List<int> values = [];
+    int length = binaryString.length;
+
+    for (int i = 0; i < length; i++) {
+      int placeValue = pow(2, length - 1 - i).toInt();
+      values.add(placeValue);
+    }
+    return values;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -187,24 +201,69 @@ class _PracticeBinaryToDecimalPageState extends State<PracticeBinaryToDecimalPag
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Spacer(flex: 1),
-                    Container(
-                      padding: EdgeInsets.symmetric(
-                        horizontal: 16,
-                        vertical: 8,
-                      ),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(20),
-                      ),
-                      child: Text(
-                        getBinaryNumber(currentNumber ?? 0),
-                        style: TextStyle(
-                          fontSize: 48,
-                          color: Colors.black,
-                          fontWeight: FontWeight.w900,
-                          backgroundColor: Colors.white,
+                    Stack(
+                      clipBehavior: Clip.none,
+                      children: [
+                        GestureDetector(
+                          onTap: () {
+                            setState(() {
+                              showPlaceValues = !showPlaceValues;
+                            });
+                          },
+                          child: Container(
+                            padding: EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 8,
+                            ),
+                            decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: Text(
+                              getBinaryNumber(currentNumber ?? 0),
+                              style: TextStyle(
+                                height: showPlaceValues ? 1.5 : 1,
+                                letterSpacing: 1.5,
+                                fontSize: 48,
+                                color: Colors.black,
+                                fontWeight: FontWeight.w900,
+                                backgroundColor: Colors.white,
+                              ),
+                            ),
+                          ),
                         ),
-                      ),
+                        Positioned(
+                          top: 55,
+                          left: 17,
+                          right: 0,
+                          child: Column(
+                            children: [
+                              AnimatedOpacity(
+                                opacity: showPlaceValues ? 1.0 : 0.0,
+                                duration: Duration(milliseconds: 200),
+                                child: AnimatedContainer(
+                                  duration: Duration(milliseconds: 200),
+                                  height: showPlaceValues ? 40 : 0,
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children:
+                                        getPlaceValues(
+                                              getBinaryNumber(currentNumber),
+                                            )
+                                            .map(
+                                              (value) => Container(
+                                                width: 30,
+                                                child: Text('$value'),
+                                              ),
+                                            )
+                                            .toList(),
+                                  ),
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                      ],
                     ),
                     SizedBox(height: 60),
                     SizedBox(
