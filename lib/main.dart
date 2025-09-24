@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:learningbinary/pages/history.dart';
 import 'package:learningbinary/pages/home.dart';
+import 'package:learningbinary/pages/learning/binaryToDecimal.dart';
 import 'package:learningbinary/pages/learning/learningMain.dart';
 import 'package:learningbinary/pages/practice/binaryToDecimal.dart';
 import 'package:learningbinary/pages/practice/binaryToText.dart';
@@ -58,6 +59,9 @@ class _MyAppState extends State<MyApp> {
           //Learning
           case "learning":
             page = LearningPage();
+            break;
+          case "learningbinarytodecimal":
+            page = LearningBinaryToDecimalPage();
             break;
           case "history":
             page = HistoryPage();
