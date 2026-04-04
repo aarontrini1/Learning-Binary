@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
-import 'package:google_fonts/google_fonts.dart';
-
+import 'package:learningbinary/utils/practiceFeedbackPanel.dart';
 import 'package:flutter/services.dart';
 
 class PracticeBinaryToTextPage extends StatefulWidget {
@@ -57,11 +56,8 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
 
   String generateRandomString(int len) {
     var r = Random();
-    const _chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
-    return List.generate(
-      len,
-      (index) => _chars[r.nextInt(_chars.length)],
-    ).join();
+    const chars = 'AaBbCcDdEeFfGgHhIiJjKkLlMmNnOoPpQqRrSsTtUuVvWwXxYyZz';
+    return List.generate(len, (index) => chars[r.nextInt(chars.length)]).join();
   }
 
   String getBinaryNumber(char) {
@@ -72,7 +68,6 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
   List<int> getPlaceValues(String binaryString) {
     List<int> values = [];
     int length = binaryString.length;
-
     for (int i = 0; i < length; i++) {
       int placeValue = pow(2, length - 1 - i).toInt();
       values.add(placeValue);
@@ -80,103 +75,27 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
     return values;
   }
 
-  Widget _buildFeedbackPanel() {
-    return Container(
-      width: double.infinity,
-      height: 200,
-      color: Colors.black,
-      padding: EdgeInsets.symmetric(horizontal: 10),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 10),
-          Row(
-            children: [
-              Image.asset(
-                isCorrect ?? false
-                    ? 'assets/check_mark.png'
-                    : 'assets/incorrect_mark.png',
-                height: 28,
-                width: 28,
-              ),
-              SizedBox(width: 5),
-              Text(
-                isCorrect ?? false ? "Correct! " : "Incorrect",
-                style: GoogleFonts.caveatBrush(
-                  color: isCorrect ?? false ? Colors.green : Colors.red,
-                  fontSize: 30,
-                ),
-              ),
-            ],
-          ),
-          if (isCorrect == false)
-            Text(
-              "Correct Answer:",
-              style: GoogleFonts.caveatBrush(color: Colors.red, fontSize: 24),
-            ),
-          if (isCorrect == false)
-            Text(
-              "\"$currentCharacter\"",
-              style: TextStyle(
-                color: Colors.red,
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          SizedBox(height: 10),
-          Spacer(flex: 1),
-          ConstrainedBox(
-            constraints: BoxConstraints.tightFor(
-              height: 50,
-              width: MediaQuery.of(context).size.width,
-            ),
-            child: ElevatedButton(
-              onPressed: () => nextQuestion(),
-              style: ElevatedButton.styleFrom(backgroundColor: Colors.green),
-              child: Text(
-                "CONTINUE",
-                style: TextStyle(
-                  color: Colors.black,
-                  fontWeight: FontWeight.w900,
-                  fontSize: 18,
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 20),
-        ],
-      ),
-    );
-  }
-
   Widget _buildDigitBoxes(i) {
-    String text = _answerController.text;
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Container(
-          margin: EdgeInsets.symmetric(horizontal: 2),
-          width: MediaQuery.of(context).size.width / 10,
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(8),
-            border: Border.all(
-              color: showFeedback
-                  ? (isCorrect ?? false ? Colors.green : Colors.red)
-                  : Colors.grey,
-              width: 2,
-            ),
-          ),
-          child: Center(
-            child: Text(
-              _answerController.text[i],
-              style: TextStyle(fontSize: 24),
-            ),
-          ),
+    return Container(
+      margin: const EdgeInsets.symmetric(horizontal: 2),
+      width: 36,
+      height: 50,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(8),
+        border: Border.all(
+          color: showFeedback
+              ? (isCorrect ?? false ? Colors.green : Colors.red)
+              : Colors.grey,
+          width: 2,
         ),
-      ],
+      ),
+      child: Center(
+        child: Text(
+          _answerController.text[i],
+          style: const TextStyle(fontSize: 24),
+        ),
+      ),
     );
   }
 
@@ -192,7 +111,6 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                   begin: Alignment.topCenter,
                   end: Alignment.bottomCenter,
                   colors: [
-                    // Light colour on top and dark on bottom
                     Colors.green.shade100,
                     const Color.fromARGB(255, 6, 132, 14),
                   ],
@@ -207,7 +125,7 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Spacer(flex: 1),
+                    const Spacer(flex: 1),
                     Stack(
                       clipBehavior: Clip.none,
                       children: [
@@ -218,16 +136,13 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                             });
                           },
                           child: Container(
-                            padding: EdgeInsets.symmetric(
-                              horizontal: 16,
-                              vertical: 8,
-                            ),
+                            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
                             decoration: BoxDecoration(
                               color: Colors.white,
                               borderRadius: BorderRadius.circular(20),
                             ),
                             child: AnimatedDefaultTextStyle(
-                              duration: Duration(milliseconds: 200),
+                              duration: const Duration(milliseconds: 200),
                               style: TextStyle(
                                 height: showPlaceValues ? 1.5 : 1,
                                 letterSpacing: 1.5,
@@ -248,23 +163,15 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                             children: [
                               AnimatedOpacity(
                                 opacity: showPlaceValues ? 1.0 : 0.0,
-                                duration: Duration(milliseconds: 200),
+                                duration: const Duration(milliseconds: 200),
                                 child: AnimatedContainer(
-                                  duration: Duration(milliseconds: 200),
+                                  duration: const Duration(milliseconds: 200),
                                   height: showPlaceValues ? 40 : 0,
                                   child: Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
-                                    children:
-                                        getPlaceValues(
-                                              getBinaryNumber(currentCharacter),
-                                            )
-                                            .map(
-                                              (value) => Container(
-                                                width: 30,
-                                                child: Text('$value'),
-                                              ),
-                                            )
-                                            .toList(),
+                                    children: getPlaceValues(getBinaryNumber(currentCharacter))
+                                        .map((value) => SizedBox(width: 30, child: Text('$value')))
+                                        .toList(),
                                   ),
                                 ),
                               ),
@@ -273,8 +180,7 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                         ),
                       ],
                     ),
-                    
-                    SizedBox(height: 60),
+                    const SizedBox(height: 60),
                     SizedBox(
                       height: 60,
                       width: double.infinity,
@@ -284,18 +190,12 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
-                              for (
-                                int i = 0;
-                                i < _answerController.text.length;
-                                i++
-                              )
+                              for (int i = 0; i < _answerController.text.length; i++)
                                 _buildDigitBoxes(i),
                             ],
                           ),
                           Opacity(
-                            opacity: _answerController.text.length < 1
-                                ? 1
-                                : 0.0,
+                            opacity: _answerController.text.isEmpty ? 1 : 0.0,
                             child: SizedBox(
                               width: 210,
                               child: TextField(
@@ -303,59 +203,41 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                                 controller: _answerController,
                                 keyboardType: TextInputType.text,
                                 inputFormatters: <TextInputFormatter>[
-                                  FilteringTextInputFormatter.allow(
-                                    RegExp('[a-zA-Z]'),
-                                  ),
+                                  FilteringTextInputFormatter.allow(RegExp('[a-zA-Z]')),
                                   LengthLimitingTextInputFormatter(8),
                                 ],
                                 showCursor: false,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   hintText: 'Answer with a letter',
                                   focusedBorder: UnderlineInputBorder(
-                                    borderSide: BorderSide(
-                                      color: Colors.blue,
-                                      width: 4,
-                                    ),
+                                    borderSide: BorderSide(color: Colors.blue, width: 4),
                                   ),
                                 ),
-                                style: TextStyle(
-                                  fontSize: 22,
-                                  fontWeight: FontWeight.w600,
-                                ),
+                                style: const TextStyle(fontSize: 22, fontWeight: FontWeight.w600),
                               ),
                             ),
                           ),
                         ],
                       ),
                     ),
-                    Spacer(flex: 2),
-                    ElevatedButton(
-                      onPressed: _answerController.text.length < 1
-                          ? null
-                          : checkAnswer,
-
-                      style: ElevatedButton.styleFrom(
-                        minimumSize: Size(
-                          double.infinity,
-                          MediaQuery.sizeOf(context).width / 7,
-                        ),
-                      ),
-                      child: Text(
-                        'Check',
-                        style: TextStyle(
-                          fontSize: 24,
-                          fontWeight: FontWeight.w900,
+                    const Spacer(flex: 2),
+                    SizedBox(
+                      width: double.infinity,
+                      height: 56,
+                      child: ElevatedButton(
+                        onPressed: _answerController.text.isEmpty ? null : checkAnswer,
+                        child: const Text(
+                          'Check',
+                          style: TextStyle(fontSize: 24, fontWeight: FontWeight.w900),
                         ),
                       ),
                     ),
-                    SizedBox(height: 10),
+                    const SizedBox(height: 10),
                   ],
                 ),
               ),
             ),
           ),
-
-          // Back button
           Positioned(
             top: 0,
             left: 0,
@@ -367,7 +249,7 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
                   color: Colors.blueAccent,
                   onPressed: () {
                     FocusScope.of(context).unfocus();
-                    Future.delayed(Duration(milliseconds: 250), () {
+                    Future.delayed(const Duration(milliseconds: 250), () {
                       Navigator.of(context).pop();
                     });
                   },
@@ -375,15 +257,17 @@ class _PracticeBinaryToTextPageState extends State<PracticeBinaryToTextPage> {
               ),
             ),
           ),
-
-          // Feedback panel
           if (showFeedback)
             Positioned(
-              bottom: showFeedback == false ? -200 : 0,
+              bottom: 0,
               left: 0,
               right: 0,
-              height: isCorrect ?? false ? 150 : 200,
-              child: _buildFeedbackPanel(),
+              child: PracticeFeedbackPanel(
+                isCorrect: isCorrect ?? false,
+                correctAnswer: '"$currentCharacter"',
+                explanation: binaryToTextExplanation(currentCharacter!),
+                onContinue: nextQuestion,
+              ),
             ),
         ],
       ),
