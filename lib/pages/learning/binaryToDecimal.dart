@@ -164,9 +164,157 @@ class _LearningBinaryToDecimalPageState
   }
 
   Widget _buildPage2() {
-    return _buildPageContent(children: [
-      Center(child: Text('Page 2 – Place Values', style: TextStyle(fontSize: 22, color: Colors.grey))),
-    ]);
+    final placeValues = [128, 64, 32, 16, 8, 4, 2, 1];
+    final powers = [7, 6, 5, 4, 3, 2, 1, 0];
+
+    return _buildPageContent(
+      children: [
+        Center(
+          child: Text(
+            'Place Values',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade800,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'In decimal, each position is worth 10× more than the one to its right:',
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 12),
+        _buildValueRow(
+          labels: ['1000', '100', '10', '1'],
+          color: Colors.orange.shade100,
+          borderColor: Colors.orange.shade400,
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'In binary, each position is worth 2× more:',
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 12),
+        _buildValueRow(
+          labels: placeValues.map((v) => '$v').toList(),
+          color: Colors.green.shade100,
+          borderColor: Colors.green.shade400,
+        ),
+        const SizedBox(height: 8),
+        Center(
+          child: Text(
+            'Each position doubles from right to left',
+            style: TextStyle(
+              fontSize: 14,
+              color: Colors.grey.shade600,
+              fontStyle: FontStyle.italic,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'These values come from powers of 2:',
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 12),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: List.generate(placeValues.length, (i) {
+            return Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    '2${_superscript(powers[i])}',
+                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                  ),
+                  const SizedBox(height: 4),
+                  const Icon(Icons.arrow_downward, size: 14, color: Colors.grey),
+                  const SizedBox(height: 4),
+                  Container(
+                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+                    decoration: BoxDecoration(
+                      color: Colors.green.shade100,
+                      borderRadius: BorderRadius.circular(6),
+                      border: Border.all(color: Colors.green.shade400),
+                    ),
+                    child: Center(
+                      child: Text(
+                        '${placeValues[i]}',
+                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 32),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.blue.shade200),
+          ),
+          child: Column(
+            children: [
+              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              const SizedBox(height: 8),
+              Text(
+                'An 8-digit binary number can represent any value from 0 to 255. \n'
+                'Need bigger numbers? Just add more digits! '
+                'For example, 16 digits gets you up to 65,535.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: Colors.blue.shade900,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  String _superscript(int number) {
+    const superscripts = {
+      '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
+      '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
+    };
+    return number.toString().split('').map((c) => superscripts[c] ?? c).join();
+  }
+
+  Widget _buildValueRow({
+    required List<String> labels,
+    required Color color,
+    required Color borderColor,
+  }) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: labels.map((label) {
+        return Expanded(
+          child: Container(
+            margin: const EdgeInsets.symmetric(horizontal: 2),
+            padding: const EdgeInsets.symmetric(vertical: 10),
+            decoration: BoxDecoration(
+              color: color,
+              borderRadius: BorderRadius.circular(8),
+              border: Border.all(color: borderColor, width: 1.5),
+            ),
+            alignment: Alignment.center,
+            child: Text(
+              label,
+              style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+      }).toList(),
+    );
   }
 
   Widget _buildPage3() {
