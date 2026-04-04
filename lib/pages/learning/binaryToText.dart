@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
+import 'package:learningbinary/utils/progresstracker.dart';
 
 class LearningBinaryToTextPage extends StatefulWidget {
   const LearningBinaryToTextPage({super.key});
@@ -15,6 +16,7 @@ class _LearningBinaryToTextPageState
   int _currentPage = 0;
   final int _totalPages = 5;
   bool _showAnswer = false;
+  bool _sectionCompleted = false;
 
   @override
   void dispose() {
@@ -862,6 +864,12 @@ class _LearningBinaryToTextPageState
                   _currentPage = index;
                   if (index != 4) _showAnswer = false;
                 });
+                if (index == _totalPages - 1 && !_sectionCompleted) {
+                  _sectionCompleted = true;
+                  ProgressTracker.completeSection(
+                    ProgressTracker.binaryToText,
+                  ); 
+                }
               },
               itemBuilder: (context, index) => _buildPage(index),
             ),

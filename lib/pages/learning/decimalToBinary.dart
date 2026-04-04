@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learningbinary/utils/progresstracker.dart';
 
 class LearningDecimalToBinaryPage extends StatefulWidget {
   const LearningDecimalToBinaryPage({super.key});
@@ -14,6 +15,7 @@ class _LearningDecimalToBinaryPageState
   int _currentPage = 0;
   final int _totalPages = 5;
   bool _showAnswer = false;
+  bool _sectionCompleted = false;
 
   @override
   void dispose() {
@@ -744,6 +746,12 @@ class _LearningDecimalToBinaryPageState
                   _currentPage = index;
                   if (index != 4) _showAnswer = false;
                 });
+                if (index == _totalPages - 1 && !_sectionCompleted) {
+                  _sectionCompleted = true;
+                  ProgressTracker.completeSection(
+                    ProgressTracker.decimalToBinary,
+                  ); 
+                }
               },
               itemBuilder: (context, index) => _buildPage(index),
             ),

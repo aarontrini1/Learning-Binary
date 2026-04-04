@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:learningbinary/utils/progresstracker.dart';
 
 class LearningBinaryToDecimalPage extends StatefulWidget {
   const LearningBinaryToDecimalPage({super.key});
@@ -14,6 +15,7 @@ class _LearningBinaryToDecimalPageState
   int _currentPage = 0;
   final int _totalPages = 5;
   bool _showAnswer = false;
+  bool _sectionCompleted = false;
 
   @override
   void dispose() {
@@ -117,7 +119,11 @@ class _LearningBinaryToDecimalPageState
           ),
           child: Column(
             children: [
-              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              Icon(
+                Icons.lightbulb_outline,
+                color: Colors.blue.shade700,
+                size: 28,
+              ),
               const SizedBox(height: 8),
               Text(
                 'Every number you know (like 42 or 255) can be '
@@ -227,13 +233,23 @@ class _LearningBinaryToDecimalPageState
                 children: [
                   Text(
                     '2${_superscript(powers[i])}',
-                    style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w500),
+                    style: const TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.w500,
+                    ),
                   ),
                   const SizedBox(height: 4),
-                  const Icon(Icons.arrow_downward, size: 14, color: Colors.grey),
+                  const Icon(
+                    Icons.arrow_downward,
+                    size: 14,
+                    color: Colors.grey,
+                  ),
                   const SizedBox(height: 4),
                   Container(
-                    padding: const EdgeInsets.symmetric(vertical: 6, horizontal: 2),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 6,
+                      horizontal: 2,
+                    ),
                     decoration: BoxDecoration(
                       color: Colors.green.shade100,
                       borderRadius: BorderRadius.circular(6),
@@ -242,7 +258,10 @@ class _LearningBinaryToDecimalPageState
                     child: Center(
                       child: Text(
                         '${placeValues[i]}',
-                        style: const TextStyle(fontSize: 13, fontWeight: FontWeight.bold),
+                        style: const TextStyle(
+                          fontSize: 13,
+                          fontWeight: FontWeight.bold,
+                        ),
                       ),
                     ),
                   ),
@@ -262,7 +281,11 @@ class _LearningBinaryToDecimalPageState
           ),
           child: Column(
             children: [
-              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              Icon(
+                Icons.lightbulb_outline,
+                color: Colors.blue.shade700,
+                size: 28,
+              ),
               const SizedBox(height: 8),
               Text(
                 'An 8-digit binary number can represent any value from 0 to 255. '
@@ -284,8 +307,16 @@ class _LearningBinaryToDecimalPageState
 
   String _superscript(int number) {
     const superscripts = {
-      '0': '⁰', '1': '¹', '2': '²', '3': '³', '4': '⁴',
-      '5': '⁵', '6': '⁶', '7': '⁷', '8': '⁸', '9': '⁹',
+      '0': '⁰',
+      '1': '¹',
+      '2': '²',
+      '3': '³',
+      '4': '⁴',
+      '5': '⁵',
+      '6': '⁶',
+      '7': '⁷',
+      '8': '⁸',
+      '9': '⁹',
     };
     return number.toString().split('').map((c) => superscripts[c] ?? c).join();
   }
@@ -374,7 +405,9 @@ class _LearningBinaryToDecimalPageState
                     style: TextStyle(
                       fontSize: 13,
                       fontWeight: FontWeight.bold,
-                      color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                      color: isOn
+                          ? Colors.green.shade800
+                          : Colors.grey.shade400,
                     ),
                   ),
                   const SizedBox(height: 6),
@@ -382,10 +415,14 @@ class _LearningBinaryToDecimalPageState
                     margin: const EdgeInsets.symmetric(horizontal: 2),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: isOn ? Colors.green.shade100 : Colors.grey.shade100,
+                      color: isOn
+                          ? Colors.green.shade100
+                          : Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: isOn ? Colors.green.shade400 : Colors.grey.shade300,
+                        color: isOn
+                            ? Colors.green.shade400
+                            : Colors.grey.shade300,
                         width: 1.5,
                       ),
                     ),
@@ -395,7 +432,9 @@ class _LearningBinaryToDecimalPageState
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                        color: isOn
+                            ? Colors.green.shade800
+                            : Colors.grey.shade400,
                       ),
                     ),
                   ),
@@ -405,7 +444,9 @@ class _LearningBinaryToDecimalPageState
                     style: TextStyle(
                       fontSize: 11,
                       fontWeight: FontWeight.w600,
-                      color: isOn ? Colors.green.shade700 : Colors.grey.shade400,
+                      color: isOn
+                          ? Colors.green.shade700
+                          : Colors.grey.shade400,
                     ),
                   ),
                 ],
@@ -424,7 +465,11 @@ class _LearningBinaryToDecimalPageState
           ),
           child: Column(
             children: [
-              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              Icon(
+                Icons.lightbulb_outline,
+                color: Colors.blue.shade700,
+                size: 28,
+              ),
               const SizedBox(height: 8),
               Text(
                 'Only the ON bits matter! Ignore anything that is OFF. '
@@ -480,10 +525,14 @@ class _LearningBinaryToDecimalPageState
                     margin: const EdgeInsets.symmetric(horizontal: 2),
                     padding: const EdgeInsets.symmetric(vertical: 10),
                     decoration: BoxDecoration(
-                      color: isOn ? Colors.green.shade100 : Colors.grey.shade100,
+                      color: isOn
+                          ? Colors.green.shade100
+                          : Colors.grey.shade100,
                       borderRadius: BorderRadius.circular(8),
                       border: Border.all(
-                        color: isOn ? Colors.green.shade400 : Colors.grey.shade300,
+                        color: isOn
+                            ? Colors.green.shade400
+                            : Colors.grey.shade300,
                         width: 1.5,
                       ),
                     ),
@@ -493,7 +542,9 @@ class _LearningBinaryToDecimalPageState
                       style: TextStyle(
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                        color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                        color: isOn
+                            ? Colors.green.shade800
+                            : Colors.grey.shade400,
                       ),
                     ),
                   ),
@@ -503,7 +554,9 @@ class _LearningBinaryToDecimalPageState
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
-                      color: isOn ? Colors.green.shade800 : Colors.grey.shade300,
+                      color: isOn
+                          ? Colors.green.shade800
+                          : Colors.grey.shade300,
                     ),
                   ),
                 ],
@@ -552,7 +605,11 @@ class _LearningBinaryToDecimalPageState
           ),
           child: Column(
             children: [
-              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              Icon(
+                Icons.lightbulb_outline,
+                color: Colors.blue.shade700,
+                size: 28,
+              ),
               const SizedBox(height: 8),
               Text(
                 '00010101 in binary = 21 in decimal!',
@@ -592,10 +649,7 @@ class _LearningBinaryToDecimalPageState
           ),
         ),
         const SizedBox(width: 12),
-        Text(
-          text,
-          style: const TextStyle(fontSize: 16, height: 1.4),
-        ),
+        Text(text, style: const TextStyle(fontSize: 16, height: 1.4)),
       ],
     );
   }
@@ -659,7 +713,10 @@ class _LearningBinaryToDecimalPageState
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.blue.shade700,
                 foregroundColor: Colors.white,
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 12,
+                ),
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                 ),
@@ -678,10 +735,14 @@ class _LearningBinaryToDecimalPageState
                           margin: const EdgeInsets.symmetric(horizontal: 2),
                           padding: const EdgeInsets.symmetric(vertical: 10),
                           decoration: BoxDecoration(
-                            color: isOn ? Colors.green.shade100 : Colors.grey.shade100,
+                            color: isOn
+                                ? Colors.green.shade100
+                                : Colors.grey.shade100,
                             borderRadius: BorderRadius.circular(8),
                             border: Border.all(
-                              color: isOn ? Colors.green.shade400 : Colors.grey.shade300,
+                              color: isOn
+                                  ? Colors.green.shade400
+                                  : Colors.grey.shade300,
                               width: 1.5,
                             ),
                           ),
@@ -691,7 +752,9 @@ class _LearningBinaryToDecimalPageState
                             style: TextStyle(
                               fontSize: 18,
                               fontWeight: FontWeight.bold,
-                              color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                              color: isOn
+                                  ? Colors.green.shade800
+                                  : Colors.grey.shade400,
                             ),
                           ),
                         ),
@@ -701,7 +764,9 @@ class _LearningBinaryToDecimalPageState
                           style: TextStyle(
                             fontSize: 14,
                             fontWeight: FontWeight.bold,
-                            color: isOn ? Colors.green.shade800 : Colors.grey.shade300,
+                            color: isOn
+                                ? Colors.green.shade800
+                                : Colors.grey.shade300,
                           ),
                         ),
                       ],
@@ -711,7 +776,10 @@ class _LearningBinaryToDecimalPageState
               ),
               const SizedBox(height: 20),
               Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 24,
+                  vertical: 16,
+                ),
                 decoration: BoxDecoration(
                   color: Colors.green.shade50,
                   borderRadius: BorderRadius.circular(12),
@@ -740,7 +808,11 @@ class _LearningBinaryToDecimalPageState
           ),
           child: Column(
             children: [
-              Icon(Icons.emoji_events_outlined, color: Colors.blue.shade700, size: 28),
+              Icon(
+                Icons.emoji_events_outlined,
+                color: Colors.blue.shade700,
+                size: 28,
+              ),
               const SizedBox(height: 8),
               Text(
                 "You've learned how to read binary! "
@@ -761,12 +833,18 @@ class _LearningBinaryToDecimalPageState
 
   Widget _buildPage(int index) {
     switch (index) {
-      case 0: return _buildPage1();
-      case 1: return _buildPage2();
-      case 2: return _buildPage3();
-      case 3: return _buildPage4();
-      case 4: return _buildPage5();
-      default: return _buildPage1();
+      case 0:
+        return _buildPage1();
+      case 1:
+        return _buildPage2();
+      case 2:
+        return _buildPage3();
+      case 3:
+        return _buildPage4();
+      case 4:
+        return _buildPage5();
+      default:
+        return _buildPage1();
     }
   }
 
@@ -817,6 +895,12 @@ class _LearningBinaryToDecimalPageState
                   _currentPage = index;
                   if (index != 4) _showAnswer = false;
                 });
+                if (index == _totalPages - 1 && !_sectionCompleted) {
+                  _sectionCompleted = true;
+                  ProgressTracker.completeSection(
+                    ProgressTracker.binaryToDecimal,
+                  ); 
+                }
               },
               itemBuilder: (context, index) => _buildPage(index),
             ),
@@ -846,7 +930,10 @@ class _LearningBinaryToDecimalPageState
             right: 0,
             child: SafeArea(
               child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 16,
+                ),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -858,7 +945,9 @@ class _LearningBinaryToDecimalPageState
                           onPressed: () => _goToPage(_currentPage - 1),
                           icon: const Icon(Icons.arrow_back_ios, size: 16),
                           label: const Text('Back'),
-                          style: TextButton.styleFrom(foregroundColor: Colors.white),
+                          style: TextButton.styleFrom(
+                            foregroundColor: Colors.white,
+                          ),
                         ),
                       ),
                     ),
@@ -868,17 +957,23 @@ class _LearningBinaryToDecimalPageState
                         if (_currentPage < _totalPages - 1) {
                           _goToPage(_currentPage + 1);
                         } else {
-                          Navigator.of(context).pushReplacementNamed('practicebinarytodecimal');
+                          Navigator.of(
+                            context,
+                          ).pushReplacementNamed('practicebinarytodecimal');
                         }
                       },
-                      label: Text(_currentPage < _totalPages - 1 ? 'Next' : 'Practice'),
+                      label: Text(
+                        _currentPage < _totalPages - 1 ? 'Next' : 'Practice',
+                      ),
                       icon: Icon(
                         _currentPage < _totalPages - 1
                             ? Icons.arrow_forward_ios
                             : Icons.play_arrow,
                         size: 16,
                       ),
-                      style: TextButton.styleFrom(foregroundColor: Colors.white),
+                      style: TextButton.styleFrom(
+                        foregroundColor: Colors.white,
+                      ),
                     ),
                   ],
                 ),
