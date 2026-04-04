@@ -4,6 +4,7 @@ import 'package:learningbinary/pages/history.dart';
 import 'package:learningbinary/pages/home.dart';
 import 'package:learningbinary/pages/learning/binaryToDecimal.dart';
 import 'package:learningbinary/pages/learning/learningMain.dart';
+import 'package:learningbinary/pages/learning/decimalToBinary.dart';
 import 'package:learningbinary/pages/practice/binaryToDecimal.dart';
 import 'package:learningbinary/pages/practice/binaryToText.dart';
 import 'package:learningbinary/pages/practice/decimalToBinary.dart';
@@ -29,9 +30,9 @@ class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
     SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-        DeviceOrientation.portraitDown,
-      ]);
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
     return MaterialApp(
       title: "Learning Binary",
       onGenerateRoute: (settings) {
@@ -63,22 +64,27 @@ class _MyAppState extends State<MyApp> {
           case "learningbinarytodecimal":
             page = LearningBinaryToDecimalPage();
             break;
+          case "learningdecimaltobinary":
+            page = LearningDecimalToBinaryPage();
+            break;
           case "history":
             page = HistoryPage();
             break;
           case "support":
             page = SupportPage();
-            break;          
+            break;
           default:
             throw Exception("Unknown route used: ${settings.name}");
         }
 
-        return MaterialPageRoute(builder: (context) => page, settings:settings);
+        return MaterialPageRoute(
+          builder: (context) => page,
+          settings: settings,
+        );
       },
       navigatorObservers: widget.observer != null ? [widget.observer!] : [],
       home: widget.tester,
       initialRoute: widget.tester == null ? 'home' : null,
-
     );
   }
 }

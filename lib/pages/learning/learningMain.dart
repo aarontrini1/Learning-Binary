@@ -114,7 +114,7 @@ class _LearningPageState extends State<LearningPage> {
                         minimumSize: const Size(double.infinity, 100),
                         elevation: 8,
                       ),
-                      onPressed: () {}, // Setup Nav here
+                      onPressed: () => _navigateToLearningDecimalToBinary(context), // Setup Nav here
                       child: const Text(
                         'Decimal to Binary',
                         style: TextStyle(
