@@ -74,7 +74,7 @@ class _LearningPageState extends State<LearningPage> {
                       ),
                       onPressed: () => _navigateToLearningBinaryToDecimal(context), // Setup Nav here
                       child: const Text(
-                        'Binary to Numbers',
+                        'Binary to Decimal',
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,

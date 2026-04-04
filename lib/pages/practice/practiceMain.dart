@@ -76,7 +76,7 @@ class _PracticePageState extends State<PracticePage> {
                         context,
                       ), // Setup Nav here
                       child: const Text(
-                        'Binary to Numbers',
+                        'Binary to Decimal',
                         style: TextStyle(
                           fontSize: 30,
                           fontWeight: FontWeight.bold,

@@ -13,6 +13,7 @@ class _LearningBinaryToDecimalPageState
   final PageController _pageController = PageController();
   int _currentPage = 0;
   final int _totalPages = 5;
+  bool _showAnswer = false;
 
   @override
   void dispose() {
@@ -264,7 +265,7 @@ class _LearningBinaryToDecimalPageState
               Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
               const SizedBox(height: 8),
               Text(
-                'An 8-digit binary number can represent any value from 0 to 255. \n'
+                'An 8-digit binary number can represent any value from 0 to 255. '
                 'Need bigger numbers? Just add more digits! '
                 'For example, 16 digits gets you up to 65,535.',
                 textAlign: TextAlign.center,
@@ -318,21 +319,444 @@ class _LearningBinaryToDecimalPageState
   }
 
   Widget _buildPage3() {
-    return _buildPageContent(children: [
-      Center(child: Text('Page 3 – Reading Binary', style: TextStyle(fontSize: 22, color: Colors.grey))),
-    ]);
+    final placeValues = [128, 64, 32, 16, 8, 4, 2, 1];
+    final bits = [0, 0, 0, 1, 0, 1, 0, 1]; // 10101 = 21
+
+    return _buildPageContent(
+      children: [
+        Center(
+          child: Text(
+            'Reading Binary',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade800,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'Each digit in binary is either ON (1) or OFF (0).',
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 8),
+        const Text(
+          "Let's read the number:",
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 16),
+        Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Text(
+              '00010101',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 4,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        Row(
+          children: List.generate(8, (i) {
+            final isOn = bits[i] == 1;
+            return Expanded(
+              child: Column(
+                children: [
+                  Text(
+                    '${placeValues[i]}',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: isOn ? Colors.green.shade100 : Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: isOn ? Colors.green.shade400 : Colors.grey.shade300,
+                        width: 1.5,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${bits[i]}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    isOn ? 'ON' : 'OFF',
+                    style: TextStyle(
+                      fontSize: 11,
+                      fontWeight: FontWeight.w600,
+                      color: isOn ? Colors.green.shade700 : Colors.grey.shade400,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 32),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.blue.shade200),
+          ),
+          child: Column(
+            children: [
+              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              const SizedBox(height: 8),
+              Text(
+                'Only the ON bits matter! Ignore anything that is OFF. '
+                'Here the 16, 4, and 1 positions are ON.',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: Colors.blue.shade900,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildPage4() {
-    return _buildPageContent(children: [
-      Center(child: Text('Page 4 – Adding It Up', style: TextStyle(fontSize: 22, color: Colors.grey))),
-    ]);
+    final placeValues = [128, 64, 32, 16, 8, 4, 2, 1];
+    final bits = [0, 0, 0, 1, 0, 1, 0, 1]; // same example: 21
+    final onValues = <int>[];
+    for (int i = 0; i < bits.length; i++) {
+      if (bits[i] == 1) onValues.add(placeValues[i]);
+    }
+
+    return _buildPageContent(
+      children: [
+        Center(
+          child: Text(
+            'Adding It Up',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade800,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'From the last page, we found the ON positions. '
+          'Now just add them together:',
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 20),
+        Row(
+          children: List.generate(8, (i) {
+            final isOn = bits[i] == 1;
+            return Expanded(
+              child: Column(
+                children: [
+                  Container(
+                    margin: const EdgeInsets.symmetric(horizontal: 2),
+                    padding: const EdgeInsets.symmetric(vertical: 10),
+                    decoration: BoxDecoration(
+                      color: isOn ? Colors.green.shade100 : Colors.grey.shade100,
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: isOn ? Colors.green.shade400 : Colors.grey.shade300,
+                        width: 1.5,
+                      ),
+                    ),
+                    alignment: Alignment.center,
+                    child: Text(
+                      '${bits[i]}',
+                      style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 4),
+                  Text(
+                    isOn ? '${placeValues[i]}' : '-',
+                    style: TextStyle(
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                      color: isOn ? Colors.green.shade800 : Colors.grey.shade300,
+                    ),
+                  ),
+                ],
+              ),
+            );
+          }),
+        ),
+        const SizedBox(height: 28),
+        Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            decoration: BoxDecoration(
+              color: Colors.green.shade50,
+              borderRadius: BorderRadius.circular(12),
+              border: Border.all(color: Colors.green.shade300),
+            ),
+            child: Text(
+              '${onValues.join(' + ')} = ${onValues.reduce((a, b) => a + b)}',
+              style: TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: Colors.green.shade800,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 28),
+        const Text(
+          "That's it! Three steps to convert any binary number:",
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 12),
+        _buildStep('1', 'Write out the place values'),
+        const SizedBox(height: 8),
+        _buildStep('2', 'Find which positions are ON'),
+        const SizedBox(height: 8),
+        _buildStep('3', 'Add the ON values together'),
+        const SizedBox(height: 32),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.blue.shade200),
+          ),
+          child: Column(
+            children: [
+              Icon(Icons.lightbulb_outline, color: Colors.blue.shade700, size: 28),
+              const SizedBox(height: 8),
+              Text(
+                '00010101 in binary = 21 in decimal!',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  height: 1.5,
+                  color: Colors.blue.shade900,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _buildStep(String number, String text) {
+    return Row(
+      children: [
+        Container(
+          width: 28,
+          height: 28,
+          decoration: BoxDecoration(
+            color: Colors.blue.shade700,
+            shape: BoxShape.circle,
+          ),
+          alignment: Alignment.center,
+          child: Text(
+            number,
+            style: const TextStyle(
+              color: Colors.white,
+              fontWeight: FontWeight.bold,
+              fontSize: 14,
+            ),
+          ),
+        ),
+        const SizedBox(width: 12),
+        Text(
+          text,
+          style: const TextStyle(fontSize: 16, height: 1.4),
+        ),
+      ],
+    );
   }
 
   Widget _buildPage5() {
-    return _buildPageContent(children: [
-      Center(child: Text('Page 5 – Try It Yourself', style: TextStyle(fontSize: 22, color: Colors.grey))),
-    ]);
+    final placeValues = [128, 64, 32, 16, 8, 4, 2, 1];
+    final bits = [0, 0, 1, 0, 1, 0, 1, 0]; // 00101010 = 42
+    final onValues = <int>[];
+    for (int i = 0; i < bits.length; i++) {
+      if (bits[i] == 1) onValues.add(placeValues[i]);
+    }
+    final answer = onValues.reduce((a, b) => a + b);
+
+    return _buildPageContent(
+      children: [
+        Center(
+          child: Text(
+            'Try It Yourself!',
+            style: TextStyle(
+              fontSize: 26,
+              fontWeight: FontWeight.bold,
+              color: Colors.blue.shade800,
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        const Text(
+          'Use the three steps to convert this binary number. '
+          'Take your time, then tap below to check!',
+          style: TextStyle(fontSize: 16, height: 1.5),
+        ),
+        const SizedBox(height: 24),
+        Center(
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+            decoration: BoxDecoration(
+              color: Colors.grey.shade100,
+              borderRadius: BorderRadius.circular(12),
+            ),
+            child: const Text(
+              '00101010',
+              style: TextStyle(
+                fontSize: 32,
+                fontWeight: FontWeight.w900,
+                letterSpacing: 4,
+              ),
+            ),
+          ),
+        ),
+        const SizedBox(height: 24),
+        AnimatedCrossFade(
+          duration: const Duration(milliseconds: 300),
+          crossFadeState: _showAnswer
+              ? CrossFadeState.showSecond
+              : CrossFadeState.showFirst,
+          firstChild: Center(
+            child: ElevatedButton.icon(
+              onPressed: () => setState(() => _showAnswer = true),
+              icon: const Icon(Icons.visibility),
+              label: const Text('Show Answer'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.blue.shade700,
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                ),
+              ),
+            ),
+          ),
+          secondChild: Column(
+            children: [
+              Row(
+                children: List.generate(8, (i) {
+                  final isOn = bits[i] == 1;
+                  return Expanded(
+                    child: Column(
+                      children: [
+                        Container(
+                          margin: const EdgeInsets.symmetric(horizontal: 2),
+                          padding: const EdgeInsets.symmetric(vertical: 10),
+                          decoration: BoxDecoration(
+                            color: isOn ? Colors.green.shade100 : Colors.grey.shade100,
+                            borderRadius: BorderRadius.circular(8),
+                            border: Border.all(
+                              color: isOn ? Colors.green.shade400 : Colors.grey.shade300,
+                              width: 1.5,
+                            ),
+                          ),
+                          alignment: Alignment.center,
+                          child: Text(
+                            '${bits[i]}',
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: isOn ? Colors.green.shade800 : Colors.grey.shade400,
+                            ),
+                          ),
+                        ),
+                        const SizedBox(height: 4),
+                        Text(
+                          isOn ? '${placeValues[i]}' : '-',
+                          style: TextStyle(
+                            fontSize: 14,
+                            fontWeight: FontWeight.bold,
+                            color: isOn ? Colors.green.shade800 : Colors.grey.shade300,
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                }),
+              ),
+              const SizedBox(height: 20),
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+                decoration: BoxDecoration(
+                  color: Colors.green.shade50,
+                  borderRadius: BorderRadius.circular(12),
+                  border: Border.all(color: Colors.green.shade300),
+                ),
+                child: Text(
+                  '${onValues.join(' + ')} = $answer',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.green.shade800,
+                  ),
+                ),
+              ),
+            ],
+          ),
+        ),
+        const SizedBox(height: 32),
+        Container(
+          width: double.infinity,
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.blue.shade50,
+            borderRadius: BorderRadius.circular(12),
+            border: Border.all(color: Colors.blue.shade200),
+          ),
+          child: Column(
+            children: [
+              Icon(Icons.emoji_events_outlined, color: Colors.blue.shade700, size: 28),
+              const SizedBox(height: 8),
+              Text(
+                "You've learned how to read binary! "
+                "Head to Practice to test your skills.",
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: Colors.blue.shade900,
+                ),
+              ),
+            ],
+          ),
+        ),
+      ],
+    );
   }
 
   Widget _buildPage(int index) {
@@ -391,6 +815,7 @@ class _LearningBinaryToDecimalPageState
               onPageChanged: (index) {
                 setState(() {
                   _currentPage = index;
+                  if (index != 4) _showAnswer = false;
                 });
               },
               itemBuilder: (context, index) => _buildPage(index),
